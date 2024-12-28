@@ -1,0 +1,42 @@
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        // // BRUTEFORCE APPROACH --> O(nlogn)
+        // sort(s.begin(), s.end());
+        // sort(t.begin(), t.end());
+
+        // // compare
+        // return s==t;
+
+
+        // OPTIMISED METHOD - USING FREQUENCY TABLE --> O(n+m)
+        // where n is length of string s, m is length of string t
+
+        // create freqTable with size 256 because there are total 256 types of char we can store and then initialise freqTable with 0
+        int freqTable[256] = {0};
+        // made a MISTAKE here, i used char instead of int before and got 50/51 testcases passed because int can store 4 bytes but char will store 1 byte so by using int I had a larger range for increment/decrement of freqTable
+
+        // iterate over string s, and increment freqTable
+        for(auto ch: s)
+        {
+            freqTable[ch]++;
+        }
+
+        // iterate over string t, and decrment freqTable
+        for(auto ch: t)
+        {
+            freqTable[ch]--;
+        }
+
+        // if all elements in freqTable are now 0, then it means string s and t are anagrams, therefore return true, else return false
+        for(int i = 0; i < 256; i++)
+        {
+            if(freqTable[i] != 0)
+            {
+                return false; // string s and t are not an anagram
+            }
+        }
+        // all the elements were 0 in freqTable, return true
+        return true;
+    }
+};
