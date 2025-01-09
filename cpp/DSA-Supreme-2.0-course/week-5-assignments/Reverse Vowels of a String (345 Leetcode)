@@ -1,0 +1,33 @@
+class Solution {
+public:
+    bool isVowel(char ch)
+    {
+        ch = tolower(ch); // lower case all the upper and lower case characters present in string s
+        return ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u';
+    }
+    string reverseVowels(string s) {
+        // using 2 pointer approach
+        int l = 0;
+        int h = s.size() - 1;
+
+        while(l < h)
+        {
+            if(isVowel(s[l]) && isVowel(s[h]))
+            {
+                // if both the characters from back and front are vowels, then swap
+                swap(s[l++], s[h--]);
+            }
+            else if(!isVowel(s[l]))
+            {
+                // front character is not a vowel, then simply move to next character
+                l++;
+            }
+            else
+            {
+                // character from right side of string s i not a vowel, do h--
+                h--;
+            }
+        }
+        return s;
+    }
+};
