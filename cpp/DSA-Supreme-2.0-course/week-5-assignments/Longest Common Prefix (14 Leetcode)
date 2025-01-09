@@ -1,0 +1,41 @@
+class Solution {
+public:
+    string longestCommonPrefix(vector<string>& strs) {
+        string ans; // to store the ans string
+
+        int i = 0; // this will iterate over each character
+        while(true)
+        {
+            char curr_char = 0;
+            // iterating over each str
+            for(auto str: strs)
+            {
+                // out of bound check, in case when the previous str has more characters than the next str 
+                if(i >= str.size())
+                {
+                    curr_char = 0;
+                    break;
+                }
+
+                // if we are starting comparing this char for the first time
+                if(curr_char == 0)
+                {
+                    curr_char = str[i]; // to store the current character that we are comparing
+                }
+                // when curr_char does not matches with the str[i]
+                if(curr_char != str[i])
+                {
+                    curr_char = 0;
+                    break;
+                }
+            }
+            if(curr_char == 0)
+            {
+                break;
+            }
+                ans.push_back(curr_char);
+                i++;
+        }
+        return ans;
+    }
+};
